@@ -1,1 +1,824 @@
-Hello World
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Personal academic website of Alina Bendt, featuring research, publications, presentations, CV and contact details.">
+  <title>Alina Bendt | Researcher</title>
+
+  <style>
+    :root {
+      --ink: #18212b;
+      --muted: #5c6875;
+      --accent: #0b6b69;
+      --accent-dark: #084e4d;
+      --accent-soft: #e8f4f3;
+      --paper: #ffffff;
+      --background: #f5f7f8;
+      --border: #dbe2e7;
+      --shadow: 0 18px 50px rgba(24, 33, 43, 0.10);
+      --content-width: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--background);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--accent-dark);
+      text-underline-offset: 0.18em;
+    }
+
+    a:hover { color: var(--accent); }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 1rem;
+      z-index: 1000;
+      padding: 0.7rem 1rem;
+      color: white;
+      background: var(--ink);
+      border-radius: 0 0 0.5rem 0.5rem;
+    }
+
+    .skip-link:focus { top: 0; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-wrap {
+      width: min(calc(100% - 2rem), var(--content-width));
+      min-height: 74px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .site-name {
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .menu-toggle {
+      display: none;
+      padding: 0.55rem 0.75rem;
+      color: var(--ink);
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 0.45rem;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .nav-list {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      display: block;
+      padding: 0.55rem 0.75rem;
+      color: var(--muted);
+      border-radius: 0.4rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .nav-link:hover,
+    .nav-link[aria-current="page"] {
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+    }
+
+    main {
+      width: min(calc(100% - 2rem), var(--content-width));
+      margin: 3rem auto 5rem;
+    }
+
+    .page[hidden] { display: none; }
+
+    .hero {
+      min-height: 560px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.7fr);
+      align-items: center;
+      gap: clamp(2rem, 7vw, 6rem);
+    }
+
+    .eyebrow {
+      margin: 0 0 0.55rem;
+      color: var(--accent-dark);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.18;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0 0 1rem;
+      font-size: clamp(2.5rem, 7vw, 5.4rem);
+      letter-spacing: -0.04em;
+    }
+
+    h2 {
+      margin: 0 0 1.25rem;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      letter-spacing: -0.025em;
+    }
+
+    h3 {
+      margin-top: 0;
+      font-size: 1.35rem;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    }
+
+    .hero-actions {
+      margin-top: 1.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1rem;
+      color: white;
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 0.45rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      color: white;
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
+
+    .button.secondary {
+      color: var(--accent-dark);
+      background: transparent;
+    }
+
+    .button.secondary:hover { background: var(--accent-soft); }
+
+    .portrait-frame {
+      position: relative;
+      justify-self: end;
+      width: min(100%, 330px);
+    }
+
+    .portrait-frame::before {
+      content: "";
+      position: absolute;
+      inset: 1rem -1rem -1rem 1rem;
+      z-index: -1;
+      background: var(--accent-soft);
+      border-radius: 1.25rem;
+    }
+
+    .portrait {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      background: #dce4e8;
+      border: 8px solid var(--paper);
+      border-radius: 1.25rem;
+      box-shadow: var(--shadow);
+    }
+
+    .content-header {
+      max-width: 760px;
+      margin-bottom: 2.25rem;
+    }
+
+    .card,
+    .publication-item,
+    .presentation-item,
+    .contact-card {
+      padding: clamp(1.25rem, 3vw, 2rem);
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 0.8rem;
+      box-shadow: 0 8px 30px rgba(24, 33, 43, 0.04);
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .research-list {
+      margin: 1rem 0 0;
+      padding-left: 1.25rem;
+    }
+
+    .section-heading {
+      margin-top: 3rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 2px solid var(--accent-soft);
+    }
+
+    .publication-list {
+      padding: 0;
+      display: grid;
+      gap: 1rem;
+      list-style: none;
+      counter-reset: publications var(--publication-count);
+    }
+
+    .publication-item {
+      position: relative;
+      padding-left: 4.5rem;
+      counter-increment: publications -1;
+    }
+
+    .publication-item::before {
+      content: counter(publications) ".";
+      position: absolute;
+      top: 1.6rem;
+      left: 1.5rem;
+      color: var(--accent);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .publication-title,
+    .presentation-title {
+      margin: 0 0 0.35rem;
+      font-weight: 800;
+    }
+
+    .publication-meta,
+    .presentation-meta {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .presentation-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 0.65rem;
+      padding: 0.2rem 0.55rem;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .cv-document {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .cv-section {
+      padding: clamp(1.25rem, 3vw, 2rem);
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 0.8rem;
+      box-shadow: 0 8px 30px rgba(24, 33, 43, 0.04);
+    }
+
+    .cv-section h3 {
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.55rem;
+      border-bottom: 2px solid var(--accent-soft);
+    }
+
+    .cv-entry {
+      display: grid;
+      grid-template-columns: minmax(110px, 0.25fr) minmax(0, 1fr);
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cv-entry:first-of-type { padding-top: 0; }
+    .cv-entry:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .cv-date {
+      color: var(--accent-dark);
+      font-weight: 800;
+    }
+
+    .cv-entry h4 {
+      margin: 0 0 0.25rem;
+      font-size: 1.05rem;
+    }
+
+    .cv-entry p { margin: 0.25rem 0 0; }
+
+    .cv-list {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    .cv-list li + li { margin-top: 0.55rem; }
+
+    .cv-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .cv-tags span {
+      padding: 0.35rem 0.7rem;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    address { font-style: normal; }
+
+    .contact-card p:last-child,
+    .card p:last-child { margin-bottom: 0; }
+
+    .site-footer {
+      padding: 1.5rem 1rem;
+      color: var(--muted);
+      background: var(--paper);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    :focus-visible {
+      outline: 3px solid #f4a261;
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 760px) {
+      .nav-wrap {
+        min-height: 66px;
+        flex-wrap: wrap;
+        padding: 0.8rem 0;
+      }
+
+      .menu-toggle { display: block; }
+
+      .nav-list {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding-bottom: 0.5rem;
+      }
+
+      .nav-list.open { display: flex; }
+
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding: 1rem 0 2rem;
+      }
+
+      .portrait-frame {
+        grid-row: 1;
+        justify-self: start;
+        width: min(75vw, 290px);
+      }
+
+      .grid-two,
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .cv-entry { grid-template-columns: 1fr; }
+      .cv-entry .cv-date { margin-bottom: -0.5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="nav-wrap" aria-label="Main navigation">
+      <a class="site-name" href="#home">Alina Bendt</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu">Menu</button>
+      <ul class="nav-list" id="main-menu">
+        <li><a class="nav-link" href="#home">Home</a></li>
+        <li><a class="nav-link" href="#research">Research</a></li>
+        <li><a class="nav-link" href="#publications">Publications</a></li>
+        <li><a class="nav-link" href="#cv">CV</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="page" id="home" aria-labelledby="home-title">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">Researcher · Electronic, Electrical and Systems Engineering</p>
+          <h1 id="home-title">Alina Bendt</h1>
+          <p class="lead">
+            I am a researcher at the University of Birmingham. My work focuses on
+            <strong>[add your main research area]</strong>, with particular interests in
+            <strong>[interest one]</strong>, <strong>[interest two]</strong> and
+            <strong>[interest three]</strong>.
+          </p>
+          <p>
+            I use <strong>[methods, tools or approaches]</strong> to investigate
+            <strong>[the central question or problem your work addresses]</strong>.
+            This website brings together my current research, publications,
+            presentations and curriculum vitae.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#research">Explore my research</a>
+            <a class="button secondary" href="#contact">Contact me</a>
+          </div>
+        </div>
+
+        <div class="portrait-frame">
+          <!-- Add your photograph to the repository at assets/alina-bendt.jpg. -->
+          <img class="portrait" src="assets/alina-bendt.jpg" alt="Portrait of Alina Bendt">
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="research" aria-labelledby="research-title" hidden>
+      <header class="content-header">
+        <p class="eyebrow">Research</p>
+        <h2 id="research-title">Research area and interests</h2>
+        <p class="lead">A concise introduction to the questions, methods and wider significance of my research.</p>
+      </header>
+
+      <div class="card">
+        <h3>Research overview</h3>
+        <p>
+          My research examines <strong>[describe your research area]</strong>. I am particularly
+          interested in understanding <strong>[key research question]</strong> and in developing
+          <strong>[methods, systems or applications]</strong> that can <strong>[intended impact]</strong>.
+        </p>
+        <p>
+          My current work combines <strong>[discipline or method]</strong> with
+          <strong>[discipline or method]</strong>. The broader aim is to contribute to
+          <strong>[academic, industrial or societal goal]</strong>.
+        </p>
+      </div>
+
+      <h3 class="section-heading">Research interests</h3>
+      <div class="grid-two">
+        <article class="card">
+          <h3>[Research interest one]</h3>
+          <p>Add two or three sentences describing this interest and its role in your work.</p>
+        </article>
+        <article class="card">
+          <h3>[Research interest two]</h3>
+          <p>Add two or three sentences describing the questions or applications you investigate.</p>
+        </article>
+        <article class="card">
+          <h3>[Research interest three]</h3>
+          <p>Add two or three sentences describing the methods, data or systems involved.</p>
+        </article>
+        <article class="card">
+          <h3>[Collaboration or future direction]</h3>
+          <p>Describe the collaborations, facilities or future directions relevant to your research.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="page" id="publications" aria-labelledby="publications-title" hidden>
+      <header class="content-header">
+        <p class="eyebrow">Research outputs</p>
+        <h2 id="publications-title">Publications and presentations</h2>
+        <p class="lead">Papers appear newest first while retaining their chronological publication number.</p>
+      </header>
+
+      <h3 class="section-heading">Papers</h3>
+      <!--
+        Add papers to the array in the script at the bottom of this file.
+        Store them oldest to newest; the page automatically displays newest first
+        and gives the first paper you published the number 1.
+      -->
+      <ol class="publication-list" id="paper-list" aria-label="Published papers"></ol>
+
+      <h3 class="section-heading">Presentations</h3>
+      <div class="presentation-list" id="presentation-list"></div>
+    </section>
+
+    <section class="page" id="cv" aria-labelledby="cv-title" hidden>
+      <header class="content-header">
+        <p class="eyebrow">Curriculum vitae</p>
+        <h2 id="cv-title">CV</h2>
+        <p class="lead">My academic experience, education, expertise and professional activities.</p>
+        <p><small>Last updated: [month year]</small></p>
+      </header>
+
+      <div class="cv-document">
+        <section class="cv-section" aria-labelledby="cv-profile">
+          <h3 id="cv-profile">Profile</h3>
+          <p>
+            I am a researcher in Electronic, Electrical and Systems Engineering at the
+            University of Birmingham. Add a short professional summary here describing
+            your specialism, research focus and the impact you aim to make.
+          </p>
+        </section>
+
+        <section class="cv-section" aria-labelledby="cv-employment">
+          <h3 id="cv-employment">Academic appointments and employment</h3>
+          <div class="cv-entry">
+            <div class="cv-date">[Year]–present</div>
+            <div>
+              <h4>[Current role]</h4>
+              <p><strong>University of Birmingham</strong> · Department of Electronic, Electrical and Systems Engineering</p>
+              <p>Add a concise description of your responsibilities, projects and achievements.</p>
+            </div>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-date">[Year]–[Year]</div>
+            <div>
+              <h4>[Previous role]</h4>
+              <p><strong>[Institution or organisation]</strong> · [Department]</p>
+              <p>Add a concise description of the role and your main contributions.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cv-section" aria-labelledby="cv-education">
+          <h3 id="cv-education">Education</h3>
+          <div class="cv-entry">
+            <div class="cv-date">[Year]–[Year]</div>
+            <div>
+              <h4>[Degree and subject]</h4>
+              <p><strong>[University or institution]</strong></p>
+              <p>Thesis: “[Thesis title]” · Supervisor: [Name]</p>
+            </div>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-date">[Year]–[Year]</div>
+            <div>
+              <h4>[Degree and subject]</h4>
+              <p><strong>[University or institution]</strong></p>
+              <p>Add relevant specialisation, dissertation or distinction.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cv-section" aria-labelledby="cv-research-experience">
+          <h3 id="cv-research-experience">Research experience</h3>
+          <ul class="cv-list">
+            <li><strong>[Project or research theme]:</strong> describe your contribution, methods and outcomes.</li>
+            <li><strong>[Project or research theme]:</strong> describe collaborators, facilities or applications.</li>
+            <li><strong>[Project or research theme]:</strong> describe a significant result or ongoing direction.</li>
+          </ul>
+        </section>
+
+        <section class="cv-section" aria-labelledby="cv-skills">
+          <h3 id="cv-skills">Methods and technical skills</h3>
+          <div class="cv-tags" aria-label="Methods and technical skills">
+            <span>[Method or skill]</span>
+            <span>[Software or language]</span>
+            <span>[Experimental technique]</span>
+            <span>[Data analysis skill]</span>
+            <span>[Specialist equipment]</span>
+          </div>
+        </section>
+
+        <section class="cv-section" aria-labelledby="cv-activities">
+          <h3 id="cv-activities">Awards, service and professional activities</h3>
+          <ul class="cv-list">
+            <li><strong>[Year]:</strong> [Award, grant, professional membership or recognition].</li>
+            <li><strong>[Year]:</strong> [Teaching, supervision, reviewing or committee activity].</li>
+            <li><strong>[Year]:</strong> [Conference organisation, outreach or public engagement].</li>
+          </ul>
+        </section>
+
+        <section class="cv-section" aria-labelledby="cv-outputs">
+          <h3 id="cv-outputs">Research outputs</h3>
+          <p>
+            My papers, talks and posters are listed on the
+            <a href="#publications">Publications and presentations page</a>.
+          </p>
+        </section>
+      </div>
+    </section>
+
+    <section class="page" id="contact" aria-labelledby="contact-title" hidden>
+      <header class="content-header">
+        <p class="eyebrow">Contact</p>
+        <h2 id="contact-title">Get in touch</h2>
+        <p class="lead">For research enquiries, collaboration or speaking invitations, please contact me by email.</p>
+      </header>
+
+      <div class="contact-layout">
+        <article class="contact-card">
+          <h3>Email</h3>
+          <p><a href="mailto:a.bendt@bham.ac.uk">a.bendt@bham.ac.uk</a></p>
+
+          <h3>Institute address</h3>
+          <address>
+            Department of Electronic, Electrical and Systems Engineering<br>
+            University of Birmingham<br>
+            Edgbaston<br>
+            Birmingham B15 2TT<br>
+            United Kingdom
+          </address>
+        </article>
+
+        <aside class="card">
+          <h3>Profiles</h3>
+          <p>Add links to any academic profiles you use:</p>
+          <ul>
+            <li><a href="https://orcid.org/" rel="me noopener" target="_blank">ORCID</a></li>
+            <li><a href="https://scholar.google.com/" rel="noopener" target="_blank">Google Scholar</a></li>
+            <li><a href="https://www.linkedin.com/" rel="noopener" target="_blank">LinkedIn</a></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>&copy; <span id="year"></span> Alina Bendt.</span>
+    <span> This is a personal academic website and not an official University of Birmingham website.</span>
+  </footer>
+
+  <script>
+    /* EDIT YOUR CONTENT HERE -------------------------------------------------
+       Papers must be entered OLDEST to NEWEST. They are displayed newest first,
+       but the first paper published remains number 1.
+    ------------------------------------------------------------------------- */
+    const papers = [
+      {
+        authors: "A. Bendt, Co-author Name",
+        year: "20XX",
+        title: "Title of first published paper",
+        venue: "Journal or Conference Name, volume(issue), pages",
+        url: "#"
+      },
+      {
+        authors: "A. Bendt, Co-author Name",
+        year: "20XX",
+        title: "Title of a more recent paper",
+        venue: "Journal or Conference Name, volume(issue), pages",
+        url: "#"
+      }
+    ];
+
+    const presentations = [
+      {
+        type: "Talk",
+        title: "Title of presentation",
+        event: "Conference or seminar name",
+        place: "City, Country",
+        date: "Month 20XX",
+        url: "#"
+      },
+      {
+        type: "Poster",
+        title: "Title of poster",
+        event: "Conference name",
+        place: "City, Country",
+        date: "Month 20XX",
+        url: "#"
+      }
+    ];
+
+    const pages = [...document.querySelectorAll(".page")];
+    const navLinks = [...document.querySelectorAll(".nav-link")];
+    const menu = document.querySelector("#main-menu");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const validPages = new Set(pages.map(page => page.id));
+
+    function showPage() {
+      const requested = window.location.hash.slice(1);
+      const activeId = validPages.has(requested) ? requested : "home";
+
+      pages.forEach(page => {
+        page.hidden = page.id !== activeId;
+      });
+
+      navLinks.forEach(link => {
+        const isActive = link.getAttribute("href") === `#${activeId}`;
+        if (isActive) link.setAttribute("aria-current", "page");
+        else link.removeAttribute("aria-current");
+      });
+
+      menu.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      document.title = `${activeId[0].toUpperCase() + activeId.slice(1)} | Alina Bendt`;
+      window.scrollTo(0, 0);
+    }
+
+    function renderPapers() {
+      const list = document.querySelector("#paper-list");
+      list.style.setProperty("--publication-count", papers.length + 1);
+
+      [...papers].reverse().forEach(paper => {
+        const item = document.createElement("li");
+        item.className = "publication-item";
+        item.innerHTML = `
+          <p class="publication-title">
+            ${paper.url && paper.url !== "#"
+              ? `<a href="${paper.url}" target="_blank" rel="noopener">${paper.title}</a>`
+              : paper.title}
+          </p>
+          <p class="publication-meta">${paper.authors} (${paper.year}). ${paper.venue}.</p>`;
+        list.appendChild(item);
+      });
+    }
+
+    function renderPresentations() {
+      const list = document.querySelector("#presentation-list");
+
+      presentations.forEach(presentation => {
+        const item = document.createElement("article");
+        item.className = "presentation-item";
+        item.innerHTML = `
+          <span class="tag">${presentation.type}</span>
+          <p class="presentation-title">
+            ${presentation.url && presentation.url !== "#"
+              ? `<a href="${presentation.url}" target="_blank" rel="noopener">${presentation.title}</a>`
+              : presentation.title}
+          </p>
+          <p class="presentation-meta">${presentation.event} · ${presentation.place} · ${presentation.date}</p>`;
+        list.appendChild(item);
+      });
+    }
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menu.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    window.addEventListener("hashchange", showPage);
+    document.querySelector("#year").textContent = new Date().getFullYear();
+
+    renderPapers();
+    renderPresentations();
+    showPage();
+  </script>
+</body>
+</html>
