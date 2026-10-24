@@ -7,25 +7,40 @@
   <title>Alina Bendt | Researcher</title>
 
   <style>
+    /* ======================================================================
+       WEBSITE COLOURS AND SHARED SETTINGS
+       ----------------------------------------------------------------------
+       CSS variables are reusable values. Change a colour once here and every
+       rule using that variable will update automatically.
+
+       The palette below uses warm, aged-paper colours with purple accents.
+       Keep dark purple text on pale backgrounds and white text on dark purple
+       backgrounds so that the website remains easy to read.
+       ====================================================================== */
     :root {
-      --ink: #18212b;
-      --muted: #5c6875;
-      --accent: #0b6b69;
-      --accent-dark: #084e4d;
-      --accent-soft: #e8f4f3;
-      --paper: #ffffff;
-      --background: #f5f7f8;
-      --border: #dbe2e7;
-      --shadow: 0 18px 50px rgba(24, 33, 43, 0.10);
-      --content-width: 1120px;
+      --ink: #2f2433;             /* Main near-black purple used for headings and body text. */
+      --muted: #675d68;           /* Softer colour for secondary text. */
+      --accent: #6d3f75;          /* Main purple used for buttons and decorative details. */
+      --accent-dark: #4f2858;     /* Dark purple used for links and stronger contrast. */
+      --accent-soft: #eaddea;     /* Pale purple used behind selected links and labels. */
+      --paper: #f7efd9;           /* Light cream used for cards: like old paper. */
+      --background: #fcfaf5;      /* Warm off-white background with only a subtle paper tone. */
+      --border: #cdbd9a;          /* Warm beige borders that fit the paper palette. */
+      --shadow: 0 18px 50px rgba(72, 48, 55, 0.14); /* Soft shadow below raised items. */
+      --content-width: 1120px;    /* Maximum width of the main website content. */
     }
 
+    /* box-sizing makes widths easier to understand: padding and borders are
+       included inside the width of every element. The * means “all elements”. */
     * { box-sizing: border-box; }
 
+    /* Smoothly moves the page when a visitor follows an internal link. */
     html {
       scroll-behavior: smooth;
     }
 
+    /* These styles apply to the whole visible page. margin: 0 removes the
+       browser's default white gap around the outside. */
     body {
       margin: 0;
       color: var(--ink);
@@ -34,6 +49,9 @@
       line-height: 1.65;
     }
 
+    /* GENERAL LINKS
+       Links are dark purple by default and become a brighter purple when the
+       mouse pointer is over them. */
     a {
       color: var(--accent-dark);
       text-underline-offset: 0.18em;
@@ -41,24 +59,31 @@
 
     a:hover { color: var(--accent); }
 
+    /* ACCESSIBILITY: SKIP LINK
+       This link is normally hidden above the page. Keyboard users reveal it by
+       pressing Tab, allowing them to jump past the menu to the main content. */
     .skip-link {
       position: absolute;
       top: -100px;
       left: 1rem;
       z-index: 1000;
       padding: 0.7rem 1rem;
-      color: white;
-      background: var(--ink);
+      color: white;                 /* White is readable on the dark background. */
+      background: var(--accent-dark);
       border-radius: 0 0 0.5rem 0.5rem;
     }
 
     .skip-link:focus { top: 0; }
 
+    /* TOP NAVIGATION
+       position: sticky keeps the menu visible at the top while scrolling.
+       This colour is a slightly transparent version of the warm off-white page
+       background, allowing the blur effect to show subtly while scrolling. */
     .site-header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(252, 250, 245, 0.96);
       border-bottom: 1px solid var(--border);
       backdrop-filter: blur(12px);
     }
@@ -82,11 +107,13 @@
       white-space: nowrap;
     }
 
+    /* On small screens this button opens and closes the navigation menu.
+       It is hidden on larger screens by display: none. */
     .menu-toggle {
       display: none;
       padding: 0.55rem 0.75rem;
-      color: var(--ink);
-      background: white;
+      color: var(--accent-dark);
+      background: var(--paper);
       border: 1px solid var(--border);
       border-radius: 0.45rem;
       font: inherit;
@@ -181,6 +208,9 @@
       gap: 0.8rem;
     }
 
+    /* BUTTONS
+       The normal button uses white text on purple. Add class="secondary" to a
+       link as well as class="button" when you want the outlined version. */
     .button {
       display: inline-flex;
       align-items: center;
@@ -213,12 +243,15 @@
       width: min(100%, 330px);
     }
 
+    /* This decorative block sits behind and slightly offset from the portrait.
+       It now uses the same warm off-white as the main page background. */
     .portrait-frame::before {
       content: "";
       position: absolute;
       inset: 1rem -1rem -1rem 1rem;
       z-index: -1;
-      background: var(--accent-soft);
+      background: var(--background);
+      border: 1px solid var(--border);
       border-radius: 1.25rem;
     }
 
@@ -228,10 +261,10 @@
       display: block;
       object-fit: cover;
       object-position: center;
-      background: #dce4e8;
-      border: 8px solid var(--paper);
+      background: var(--background); /* Visible while the photograph loads. */
+      border: 8px solid var(--background);
       border-radius: 1.25rem;
-      box-shadow: var(--shadow);
+      box-shadow: none; /* Keeps the portrait flat rather than raised. */
     }
 
     .content-header {
@@ -409,11 +442,16 @@
       font-size: 0.9rem;
     }
 
+    /* Keyboard focus ring: this makes the currently selected link or control
+       clearly visible to visitors navigating without a mouse. */
     :focus-visible {
-      outline: 3px solid #f4a261;
+      outline: 3px solid #7b3f87;
       outline-offset: 3px;
     }
 
+    /* RESPONSIVE DESIGN
+       These rules take effect only when the screen is 760px wide or narrower.
+       They turn the horizontal menu into a button and stack columns vertically. */
     @media (max-width: 760px) {
       .nav-wrap {
         min-height: 66px;
@@ -460,8 +498,24 @@
   </style>
 </head>
 <body>
+  <!-- ====================================================================
+       BEGINNER'S EDITING GUIDE
+       --------------------------------------------------------------------
+       1. Explanatory notes like this one are comments; visitors cannot see them.
+       2. Most visible wording can be changed by editing text between tags,
+          for example the words inside an h2 heading or a p paragraph.
+       3. Do not remove the < and > symbols around tags.
+       4. Text in square brackets, such as [Year], is waiting to be replaced.
+       5. Save this file as index.html in the root of your GitHub repository.
+       ==================================================================== -->
+
+  <!-- Accessibility link for keyboard and screen-reader users. -->
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
+  <!-- SITE HEADER AND MENU
+       To rename a menu item, change its visible text only. Keep href="#home",
+       href="#research", and the other href values unchanged because the
+       JavaScript uses them to select the correct page. -->
   <header class="site-header">
     <nav class="nav-wrap" aria-label="Main navigation">
       <a class="site-name" href="#home">Alina Bendt</a>
@@ -476,7 +530,15 @@
     </nav>
   </header>
 
+  <!-- MAIN WEBSITE CONTENT
+       Each section below acts as a separate page. JavaScript hides all sections
+       except the one selected in the menu. To edit a page, find its matching
+       section: home, research, publications, cv, or contact. -->
   <main id="main-content" tabindex="-1">
+
+    <!-- HOME PAGE
+         Replace the bracketed text below with your own summary. <strong> makes
+         text bold. Keep paragraphs inside <p> and </p>. -->
     <section class="page" id="home" aria-labelledby="home-title">
       <div class="hero">
         <div>
@@ -501,12 +563,21 @@
         </div>
 
         <div class="portrait-frame">
-          <!-- Add your photograph to the repository at assets/alina-bendt.jpg. -->
+          <!-- YOUR PHOTOGRAPH
+               Create an "assets" folder in the repository and place your image
+               inside it as "alina-bendt.jpg". If you use another filename,
+               change src below to match it exactly, including capital letters.
+               The alt text briefly describes the image for people who cannot
+               see it; update that text if the photograph changes. -->
           <img class="portrait" src="assets/alina-bendt.jpg" alt="Portrait of Alina Bendt">
         </div>
       </div>
     </section>
 
+    <!-- RESEARCH PAGE
+         Edit the overview paragraphs and the four interest cards. You can copy
+         an entire <article class="card"> ... </article> block to add a card,
+         or remove a whole block if you need fewer interests. -->
     <section class="page" id="research" aria-labelledby="research-title" hidden>
       <header class="content-header">
         <p class="eyebrow">Research</p>
@@ -549,6 +620,10 @@
       </div>
     </section>
 
+    <!-- PUBLICATIONS PAGE
+         The paper and presentation cards are created automatically from the
+         editable JavaScript lists near the bottom of this file. Edit those
+         lists rather than adding publication HTML here. -->
     <section class="page" id="publications" aria-labelledby="publications-title" hidden>
       <header class="content-header">
         <p class="eyebrow">Research outputs</p>
@@ -568,6 +643,10 @@
       <div class="presentation-list" id="presentation-list"></div>
     </section>
 
+    <!-- CV PAGE
+         This is an HTML CV, not an attached document. Replace every bracketed
+         placeholder. To add another job or degree, copy one complete
+         <div class="cv-entry"> ... </div> block and edit the copy. -->
     <section class="page" id="cv" aria-labelledby="cv-title" hidden>
       <header class="content-header">
         <p class="eyebrow">Curriculum vitae</p>
@@ -665,6 +744,10 @@
       </div>
     </section>
 
+    <!-- CONTACT PAGE
+         To change an email address, update it twice: once after "mailto:" and
+         once in the visible link text. Check the postal address before publishing.
+         Replace each profile website address with the URL of your own profile. -->
     <section class="page" id="contact" aria-labelledby="contact-title" hidden>
       <header class="content-header">
         <p class="eyebrow">Contact</p>
@@ -706,10 +789,22 @@
   </footer>
 
   <script>
-    /* EDIT YOUR CONTENT HERE -------------------------------------------------
-       Papers must be entered OLDEST to NEWEST. They are displayed newest first,
-       but the first paper published remains number 1.
-    ------------------------------------------------------------------------- */
+    /* ======================================================================
+       EDITING PUBLICATIONS AND PRESENTATIONS
+       ----------------------------------------------------------------------
+       JavaScript powers the menu and builds the publication cards.
+
+       Each item is contained between { and }. Text values go inside quotation
+       marks, and each line except the last one in an item ends with a comma.
+       Each item except the final item in a list also needs a comma after }.
+
+       PAPERS: enter papers OLDEST to NEWEST. The website reverses them for
+       display, so the newest is at the top while your first paper remains no. 1.
+       Set url to the DOI or paper webpage. Use "#" if there is no link.
+
+       To add a paper, copy one complete paper item from { through }, paste it
+       before the final ]; and edit its five values.
+       ====================================================================== */
     const papers = [
       {
         authors: "A. Bendt, Co-author Name",
@@ -727,6 +822,10 @@
       }
     ];
 
+    /* PRESENTATIONS
+       Add talks and posters here. Change type to "Talk" or "Poster". Unlike
+       papers, presentations appear in the same order used in this list, so put
+       the newest first if that is how you want them displayed. */
     const presentations = [
       {
         type: "Talk",
@@ -746,6 +845,12 @@
       }
     ];
 
+    /* ----------------------------------------------------------------------
+       WEBSITE BEHAVIOUR
+       You normally do not need to edit anything below this line. This code
+       switches pages, opens the mobile menu, adds publications, and updates
+       the copyright year automatically.
+       ---------------------------------------------------------------------- */
     const pages = [...document.querySelectorAll(".page")];
     const navLinks = [...document.querySelectorAll(".nav-link")];
     const menu = document.querySelector("#main-menu");
