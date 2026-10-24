@@ -542,17 +542,15 @@
     <section class="page" id="home" aria-labelledby="home-title">
       <div class="hero">
         <div>
-          <p class="eyebrow">Researcher · Electronic, Electrical and Systems Engineering</p>
+          <p class="eyebrow">Researcher · University of Birmingham - School of Engineering - SERENE</p>
           <h1 id="home-title">Alina Bendt</h1>
           <p class="lead">
-            I am a researcher at the University of Birmingham. My work focuses on
-            <strong>[add your main research area]</strong>, with particular interests in
-            <strong>[interest one]</strong>, <strong>[interest two]</strong> and
-            <strong>[interest three]</strong>.
+            Welcome to my personal homepage. I am a researcher at the University of Birmingham in the SERENE (Space Environment) group.
+            My work focuses on modelling of ionospheric scintillations.
+            I am interested in dynamical systems and nonlinear phenomena, particularly turbulence in plasma.
           </p>
           <p>
-            I use <strong>[methods, tools or approaches]</strong> to investigate
-            <strong>[the central question or problem your work addresses]</strong>.
+            
             This website brings together my current research, publications,
             presentations and curriculum vitae.
           </p>
@@ -569,7 +567,7 @@
                change src below to match it exactly, including capital letters.
                The alt text briefly describes the image for people who cannot
                see it; update that text if the photograph changes. -->
-          <img class="portrait" src="assets/alina-bendt.jpg" alt="Portrait of Alina Bendt">
+          <img class="portrait" src="alina-bendt.jpg" alt="Portrait of Alina Bendt">
         </div>
       </div>
     </section>
@@ -762,7 +760,8 @@
 
           <h3>Institute address</h3>
           <address>
-            Department of Electronic, Electrical and Systems Engineering<br>
+            SERENE<br>
+            School of Engineering<br>
             University of Birmingham<br>
             Edgbaston<br>
             Birmingham B15 2TT<br>
@@ -774,9 +773,8 @@
           <h3>Profiles</h3>
           <p>Add links to any academic profiles you use:</p>
           <ul>
-            <li><a href="https://orcid.org/" rel="me noopener" target="_blank">ORCID</a></li>
-            <li><a href="https://scholar.google.com/" rel="noopener" target="_blank">Google Scholar</a></li>
-            <li><a href="https://www.linkedin.com/" rel="noopener" target="_blank">LinkedIn</a></li>
+            <li><a href="https://orcid.org/0009-0002-6513-5689" rel="me noopener" target="_blank">ORCID</a></li>
+            <li><a href="https://uk.linkedin.com/in/alina-bendt-a965571ba" rel="noopener" target="_blank">LinkedIn</a></li>
           </ul>
         </aside>
       </div>
@@ -807,18 +805,25 @@
        ====================================================================== */
     const papers = [
       {
-        authors: "A. Bendt, Co-author Name",
-        year: "20XX",
-        title: "Title of first published paper",
-        venue: "Journal or Conference Name, volume(issue), pages",
-        url: "#"
+        authors: "A. Bendt, S. C. Chapman, T. D. de Wit",
+        year: "2024",
+        title: "The Relative Prevalence of Wave Packets and Coherent Structures in the Inertial and Kinetic Ranges of Turbulence as Seen by Solar Orbiter",
+        venue: "The Astrophsical Journal, 971, 2",
+        url: "https://doi.org/10.3847/1538-4357/ad54bc"
       },
       {
-        authors: "A. Bendt, Co-author Name",
-        year: "20XX",
-        title: "Title of a more recent paper",
-        venue: "Journal or Conference Name, volume(issue), pages",
-        url: "#"
+        authors: "A. Bendt, S. C. Chapman",
+        year: "2025",
+        title: "Ubiquitous threshold for coherent structures in solar wind turbulence",
+        venue: "Physical Review Research, 7, 023176",
+        url: "https://doi.org/10.1103/PhysRevResearch.7.023176"
+      },
+      {
+        authors: "A. Bendt, S. C. Chapman",
+        year: "2026",
+        title: "Fraction of energy carried by coherent structures in the turbulent cascade in the solar wind",
+        venue: "Astrophysical Journal Letters, 998, 1",
+        url: "https://doi.org/10.3847/2041-8213/ae3820"
       }
     ];
 
@@ -829,19 +834,35 @@
     const presentations = [
       {
         type: "Talk",
-        title: "Title of presentation",
-        event: "Conference or seminar name",
-        place: "City, Country",
-        date: "Month 20XX",
-        url: "#"
+        title: "Wavelet determination of scaling exponents and intermittency seen by Solar Orbiter",
+        event: "EGU 2023",
+        place: "Vienna, Austria",
+        date: "May 2023",
+        url: "https://dx.doi.org/10.5194/egusphere-egu23-13102"
       },
       {
-        type: "Poster",
-        title: "Title of poster",
-        event: "Conference name",
-        place: "City, Country",
-        date: "Month 20XX",
-        url: "#"
+        type: "Talk",
+        title: "The relative prevalence of wave-packets and coherent structures in the inertial and kinetic ranges of turbulence as seen by Solar Orbiter",
+        event: "EGU 2024",
+        place: "Vienna, Austria",
+        date: "April 2024",
+        url: "https://dx.doi.org/10.5194/egusphere-egu24-1136"
+      },
+      {
+        type: "Talk",
+        title: "Ubiquitous threshold for coherent structures in the kinetic and inertial ranges of solar wind turbulence from Solar Orbiter observations",
+        event: "EGU 2025",
+        place: "Vienna, Austria",
+        date: "March 2025",
+        url: "https://dx.doi.org/10.5194/egusphere-egu25-3592"
+      },
+      {
+        type: "Talk",
+        title: "Evolution of power in coherent structures across scales and heliocentric distance in solar wind turbulence",
+        event: "EGU 2026",
+        place: "Vienna, Austria",
+        date: "April 2026",
+        url: "https://dx.doi.org/10.5194/egusphere-egu26-7619"
       }
     ];
 
